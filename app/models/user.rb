@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :f_name, presence: true, length: { maximum: 50 }
   validates :email, presence: true
   validates :password, presence: true
-  
+
   # Associations
   has_many :vehicles
   has_many :reservations
