@@ -5,12 +5,6 @@ class Api::V1::ReservationsController < ApplicationController
     @kenny
   end
 
-  # def new
-  #   @reservation = Reservation.new
-  #   @vehicle = Vehicle.find(params[:vehicle_id])
-  #   @reservation.vehicle = @vehicle
-  # end
-
   def create
     @reservation = Reservation.new(reservation_params)
     @reservation.user = current_user
