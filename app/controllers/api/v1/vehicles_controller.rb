@@ -3,13 +3,13 @@ class Api::V1::VehiclesController < ApplicationController
   def index
     @vehicles = Vehicle.all.order(:created_at)
 
-    render json: @vehicles, status: :ok
+    render json: @vehicles, status: 200
   end
 
   # GET /vehicles/1
   def show
     @vehicle = Vehicle.find(params[:id])
-    render json: @vehicle, status: :ok
+    render json: @vehicle, status: 200
   end
 
   # POST /vehicles
