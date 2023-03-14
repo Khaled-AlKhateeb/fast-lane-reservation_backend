@@ -1,4 +1,4 @@
-class VehiclesController < ApplicationController
+class Api::V1::VehiclesController < ApplicationController
   # GET /vehicles
   def index
     @vehicles = Vehicle.all

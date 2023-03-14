@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users do
-  resources :vehicles do
-    resources :reservations
+  namespace :api do
+    namespace :v1 do
+      resources :users
+        resources :vehicles do
+          resources :reservations
+        end
+    end
   end
-
-  end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
