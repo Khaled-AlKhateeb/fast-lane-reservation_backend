@@ -1,14 +1,15 @@
 class Api::V1::VehiclesController < ApplicationController
   # GET /vehicles
   def index
-    @vehicles = Vehicle.all
+    @vehicles = Vehicle.all.order(:created_at)
 
-    render json: @vehicles
+    render json: @vehicles, status: 200
   end
 
   # GET /vehicles/1
   def show
-    render json: @vehicle
+    @vehicle = Vehicle.find(params[:id])
+    render json: @vehicle, status: 200
   end
 
   # POST /vehicles
@@ -45,6 +46,6 @@ class Api::V1::VehiclesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def vehicle_params
-    params.fetch(:vehicle, {})
+    params.permit(:vehicle).permit(:name, :model, :price, :description, :image, :horse_power)
   end
 end
