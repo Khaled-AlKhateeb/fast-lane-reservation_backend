@@ -1,7 +1,7 @@
-class ReservationsController < ApplicationController
+class Api::V1::ReservationsController < ApplicationController
   def index
     @reservations = current_user.reservations.includes(:vehicle)
-    render json: @reservations
+    render json: @reservations, status: 200
   end
 
   # def new
