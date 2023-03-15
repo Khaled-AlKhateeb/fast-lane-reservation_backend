@@ -2,13 +2,8 @@ class Api::V1::ReservationsController < ApplicationController
   def index
     @reservations = current_user.reservations.includes(:vehicle)
     render json: @reservations, status: 200
+    @kenny
   end
-
-  # def new
-  #   @reservation = Reservation.new
-  #   @vehicle = Vehicle.find(params[:vehicle_id])
-  #   @reservation.vehicle = @vehicle
-  # end
 
   def create
     @reservation = Reservation.new(reservation_params)
