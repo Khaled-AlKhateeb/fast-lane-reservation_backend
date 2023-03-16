@@ -1,52 +1,29 @@
-class Api::V1::UsersController < ApplicationController
-  before_action :set_api_v1_user, only: %i[show update destroy]
+class Api::V1::UserController < ApplicationController
+  def signup
+    @user = User.new(user_params)
 
-  # GET /api/v1/users
-  def index
-    @api_v1_users = Api::V1::User.all
-
-    render json: @api_v1_users
-  end
-
-  # GET /api/v1/users/1
-  def show
-    render json: @api_v1_user
-  end
-
-  # POST /api/v1/users
-  def create
-    @api_v1_user = Api::V1::User.new(api_v1_user_params)
-
-    if @api_v1_user.save
-      render json: @api_v1_user, status: :created, location: @api_v1_user
+    if @user.save
+      render json: { status: 'SUCCESS', message: 'User created', data: @user }, status: :created
     else
-      render json: @api_v1_user.errors, status: :unprocessable_entity
+      render json: { status: 'ERROR', message: 'User could not be created', data: @user.errors },
+             status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /api/v1/users/1
-  def update
-    if @api_v1_user.update(api_v1_user_params)
-      render json: @api_v1_user
-    else
-      render json: @api_v1_user.errors, status: :unprocessable_entity
-    end
-  end
+  def login
+    @user = User.find_by(email: params[:email])
 
-  # DELETE /api/v1/users/1
-  def destroy
-    @api_v1_user.destroy
+    if @user&.authenticate(params[:password])
+      token = encode_token(user_id: @user.id)
+      render json: { status: 'SUCCESS', message: 'Logged in', data: { token: } }, status: :ok
+    else
+      render json: { status: 'ERROR', message: 'Invalid email or password' }, status: :unauthorized
+    end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_api_v1_user
-    @api_v1_user = Api::V1::User.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def api_v1_user_params
-    params.fetch(:api_v1_user, {})
+  def user_params
+    params.permit(:email, :name, :password, :password_confirmation)
   end
 end
