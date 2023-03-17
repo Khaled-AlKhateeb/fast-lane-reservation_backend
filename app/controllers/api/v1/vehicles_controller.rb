@@ -39,6 +39,7 @@ class Api::V1::VehiclesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   private
+
   def vehicle_params
     params.require(:vehicle).permit(:name, :model, :price, :description, :image, :horse_power)
   end
