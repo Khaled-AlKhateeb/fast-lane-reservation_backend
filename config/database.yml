@@ -28,6 +28,8 @@ default: &default
 development:
   <<: *default
   database: fast_lane_reservation_backend_development
+  username: postgres
+  password: Elias2001
   
 
   # The specified database role being used to connect to postgres.
@@ -63,6 +65,8 @@ development:
 test:
   <<: *default
   database: fast_lane_reservation_backend_test
+  username: postgres
+  password: Elias2001
   
 
 # As with config/credentials.yml, you never want to store sensitive information,
