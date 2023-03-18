@@ -1,7 +1,7 @@
 class Api::V1::VehiclesController < ApplicationController
   # GET /vehicles
   def index
-    @vehicles = Vehicle.all.order(:created_at)
+    @vehicles = Vehicle.all.order(created_at: :DESC)
 
     render json: @vehicles, status: 200
   end
@@ -37,15 +37,10 @@ class Api::V1::VehiclesController < ApplicationController
     @vehicle.destroy
   end
 
+  # Only allow a list of trusted parameters through.
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_vehicle
-    @vehicle = Vehicle.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
   def vehicle_params
-    params.permit(:vehicle).permit(:name, :model, :price, :description, :image, :horse_power)
+    params.require(:vehicle).permit(:name, :model, :price, :description, :image, :horse_power)
   end
 end

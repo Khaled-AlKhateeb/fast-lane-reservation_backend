@@ -14,6 +14,7 @@ class Api::V1::UsersController < ApplicationController
       render json: { status: 'SUCCESS', message: 'User created', data: @user }, status: :created
     else
       render json: { status: 'ERROR', message: 'User could not be created', data: @user.errors }, status: :unprocessable_entity
+
     end
   end
 
@@ -23,6 +24,8 @@ class Api::V1::UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       token = encode_token(user_id: @user.id)
       render json: { status: 'SUCCESS', message: 'Logged in', data: { token: token }, user:  @user }, status: :ok
+
+
     else
       render json: { status: 'ERROR', message: 'Invalid email or password' }, status: :unauthorized
     end
@@ -32,5 +35,6 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :username, :password,:email, :password_confirmation)
+
   end
 end
