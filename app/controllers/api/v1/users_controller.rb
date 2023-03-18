@@ -1,4 +1,4 @@
-require 'pry'
+# require 'pry'
 
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_request, only: %i[create login]
@@ -22,7 +22,7 @@ class Api::V1::UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       token = encode_token(user_id: @user.id)
-      render json: { status: 'SUCCESS', message: 'Logged in', data: { token: token } }, status: :ok
+      render json: { status: 'SUCCESS', message: 'Logged in', data: { token: token }, user:  @user }, status: :ok
     else
       render json: { status: 'ERROR', message: 'Invalid email or password' }, status: :unauthorized
     end
