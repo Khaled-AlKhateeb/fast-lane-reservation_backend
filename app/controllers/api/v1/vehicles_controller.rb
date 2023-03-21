@@ -1,4 +1,5 @@
 class Api::V1::VehiclesController < ApplicationController
+  skip_before_action :authenticate_request, only: %i[index create show]
   # GET /vehicles
   def index
     @vehicles = Vehicle.all.order(created_at: :DESC)
@@ -17,7 +18,7 @@ class Api::V1::VehiclesController < ApplicationController
     @vehicle = Vehicle.new(vehicle_params)
 
     if @vehicle.save
-      render json: @vehicle, status: :created, location: @vehicle
+      render json: @vehicle, status: :created, data: @vehicle
     else
       render json: @vehicle.errors, status: :unprocessable_entity
     end
@@ -41,6 +42,6 @@ class Api::V1::VehiclesController < ApplicationController
   private
 
   def vehicle_params
-    params.require(:vehicle).permit(:name, :model, :price, :description, :image, :horse_power)
+    params.require(:vehicle).permit(:name, :model, :price, :description, :image, :horse_power, :user_id)
   end
 end
