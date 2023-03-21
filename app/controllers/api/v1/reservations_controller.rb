@@ -2,12 +2,12 @@ class Api::V1::ReservationsController < ApplicationController
   def index
     @reservations = current_user.reservations.includes(:vehicle)
     render json: @reservations, status: 200
-    @kenny
+    # @kenny
   end
 
   def create
     @reservation = Reservation.new(reservation_params)
-    @reservation.user = current_user
+    @reservation.user_id = 1
     if @reservation.save
       render json: {
         message: 'Reservation has been made'
@@ -22,6 +22,6 @@ class Api::V1::ReservationsController < ApplicationController
   private
 
   def reservation_params
-    params.require(:reservation).permit(:start_date, :end_date, :vehicle_id)
+    params.permit(:from_date, :to_date, :number_of_person)
   end
 end
