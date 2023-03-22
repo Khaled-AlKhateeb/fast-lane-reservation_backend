@@ -42,8 +42,9 @@ gem 'bootsnap', require: false
 gem 'rack-cors'
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'capybara'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails'
 end
 
 group :development do
