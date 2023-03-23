@@ -53,7 +53,8 @@ After you're finished please remove all the comments and instructions!
 
 # 📖 Fast Lane Reservation Backend <a name="about-project"></a>
 
->  A simple UI built with Ruby on Rails
+An app to book a race care to test in the track.
+[Link to the frontend](https://github.com/Khaled-AlKhateeb/fast-lane-reservations_frontend)
 
 ## 🛠 Built With <a name="built-with"></a>
 
