@@ -8,14 +8,14 @@ class Api::V1::ReservationsController < ApplicationController
   def create
     # @vehicle = Vehicle.find(params[:id])
     # @user = User.find(params[:id])
-      @reservation = current_user.reservations.new(reservation_params)
+    @reservation = current_user.reservations.new(reservation_params)
     # @reservation = Reservation.new(reservation_params)
     # @reservation.user_id = @user.id
     # @reservation.vehicle_id = @vehicle.id
 
     if @reservation.save!
-      puts current_user.email, "C user"
-      puts current_user.id, "C user id"
+      puts current_user.email, 'C user'
+      puts current_user.id, 'C user id'
       render json: {
         message: 'Reservation has been made'
       }, status: 200
