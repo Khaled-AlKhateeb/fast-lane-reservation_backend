@@ -147,15 +147,6 @@ Install this project with:
   rspec
 ```
 
-
-### Usage
-
-To run the project, execute the following command:
-
-```sh
-  ./bin/dev
-```
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- AUTHORS -->
