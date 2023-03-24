@@ -20,7 +20,7 @@ default: &default
   host: localhost
   port: 5432
   username: postgres
-  password: 1234
+  password: ancient
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -28,7 +28,8 @@ default: &default
 development:
   <<: *default
   database: fast_lane_reservation_backend_development
- 
+  username: postgres
+  password: ancient
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -63,7 +64,9 @@ development:
 test:
   <<: *default
   database: fast_lane_reservation_backend_test
-
+  username: postgres
+  password: ancient
+  
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
