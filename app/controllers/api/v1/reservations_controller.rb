@@ -2,16 +2,10 @@ class Api::V1::ReservationsController < ApplicationController
   def index
     @reservations = current_user.reservations.to_json(include: :vehicle)
     render json: @reservations, status: 200
-    # @kenny
   end
 
   def create
-    # @vehicle = Vehicle.find(params[:id])
-    # @user = User.find(params[:id])
     @reservation = current_user.reservations.new(reservation_params)
-    # @reservation = Reservation.new(reservation_params)
-    # @reservation.user_id = @user.id
-    # @reservation.vehicle_id = @vehicle.id
 
     if @reservation.save!
       puts current_user.email, 'C user'
@@ -24,6 +18,14 @@ class Api::V1::ReservationsController < ApplicationController
         message: 'An Error Occured'
       }, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @reservation = current_user.reservations.find(params[:id])
+    @reservation.destroy
+    render json: {
+      message: 'Deleted successfully'
+    }, status: 200
   end
 
   private

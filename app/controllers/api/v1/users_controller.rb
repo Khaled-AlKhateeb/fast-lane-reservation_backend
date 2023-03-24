@@ -1,5 +1,3 @@
-# require 'pry'
-
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_request, only: %i[create login]
   def index
@@ -9,7 +7,6 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    # binding.pry
     if @user.save
       token = encode_token(user_id: @user.id)
       render json: { status: 'SUCCESS', message: 'User created', data: { token: }, user: @user }, status: :created
