@@ -140,7 +140,11 @@ Install this project with:
 ```sh
   rails db:create
   rails db:migrate
-  rails db:seed
+```
+### Run Tests
+
+```sh
+  rspec
 ```
 
 
